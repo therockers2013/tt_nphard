@@ -11,7 +11,7 @@ class Db_model extends CI_Model
         parent::__construct();
         $this->load->database();
     }
-    function store_school_info($days_off,$total_slots,$total_half_slots,$half_days,$start_mins,$end_mins,$nof_recess,$recess1,$recess2,$lecture_time)
+    function store_school_info($acad_year,$days_off,$total_slots,$total_half_slots,$half_days,$start_mins,$end_mins,$nof_recess,$recess1,$recess2,$lecture_time)
     {
         
         echo '<br/>days_off '; print_r($days_off);
@@ -25,8 +25,7 @@ class Db_model extends CI_Model
                                                    echo '<br/>recess 2 '.$recess2;
                                                    echo '<br/>lect time '.$lecture_time;
        //$this->db->query("create table tt_school_info (field varchar(50),value varchar(50))");
-       /*foreach($this->input->post('days_off') as $day)
-           echo $day."<br/>";*/
+       
         
        if(!empty($days_off))
        {

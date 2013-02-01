@@ -61,8 +61,13 @@ class Welcome extends CI_Controller {
             {
                 $this->session->set_flashdata('message',"Improper Input! Please re-adjust timing and number of slots");     // If not show message
             }
+            elseif(empty($_POST['acad_year']))
+            {
+                $this->session->set_flashdata('empty_acad',"Please enter academic year");     // If not show message
+            }
             else    // If yes then do following
             {
+                $acad_year = $this->input->post('acad_year');
                 $lecture_time = $total_time/$total_slots;   // Time per lecture / lesson / period
                 $days_off = null;                           // Set days_off to null (initialize)
                 $total_half_slots = null;                   // Set total_half_slots to null (initialize)
@@ -77,7 +82,8 @@ class Welcome extends CI_Controller {
                     $half_days = $_POST['half_day'];
                 }
                 
-                $this->db_model->store_school_info($days_off,
+                $this->db_model->store_school_info($acad_year,
+                                                   $days_off,
                                                    $total_slots,
                                                    $total_half_slots,
                                                    $half_days,
@@ -88,7 +94,7 @@ class Welcome extends CI_Controller {
                                                    $recess2,
                                                    $lecture_time);
             }
-            //redirect('welcome');
+            redirect('welcome');
 	}
 }
 

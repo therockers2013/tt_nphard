@@ -92,7 +92,9 @@
     <div id="body">
         <form name="school_info" action="<?php echo base_url('index.php/welcome/schoolInfo');?>" method="post" >
             <br/>
-            <p class="span12">Academic Year <input type="text" name="acad_year" class="span2"/></p>
+            <p class="span12">Academic Year <input type="text" name="acad_year" class="span2"/>
+                <span class="error"><?php echo $this->session->flashdata('empty_acad'); ?></span>
+            </p>
             <hr/>
 
             <legend class="days_off_section span12">
