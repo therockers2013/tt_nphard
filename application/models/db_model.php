@@ -11,25 +11,19 @@ class Db_model extends CI_Model
         parent::__construct();
         $this->load->database();
     }
-    function store_school_info($acad_year,$days_off,$total_slots,$total_half_slots,$half_days,$start_mins,$end_mins,$nof_recess,$recess1,$recess2,$recess1_slot,$recess2_slot,$lecture_time)
+    function store_school_info($acad_year,$days_off_string,$total_slots,$total_half_slots,$half_days_string,$start_mins,$end_mins,$nof_recess,$recess1,$recess2,$recess1_slot,$recess2_slot,$lecture_time)
     {
         
        $this->db->query("create table tt_school_info (field varchar(50),value varchar(50))");
        
       
-       if(!empty($days_off))
+       if(!empty($days_off_string))
        {
-           $days_off_string = "";
-           foreach($days_off as $check) 
-                $days_off_string .= $check;
            $this->db->insert("tt_school_info",array("field"=>"days_off","value"=>$days_off_string));
        }
        
-       if(!empty($half_days))
+       if(!empty($half_days_string))
        {
-           $half_days_string = "";
-           foreach($half_days as $check) 
-                $half_days_string .= $check;
            $this->db->insert("tt_school_info",array("field"=>"half_days","value"=>$half_days_string));
        }
        

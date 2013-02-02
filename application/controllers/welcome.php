@@ -68,14 +68,21 @@ class Welcome extends CI_Controller {
             $data['days_off'] = null;                           // Set days_off to null (initialize)
             $data['total_half_slots'] = null;                   // Set total_half_slots to null (initialize)
             $data['half_days'] = null;
+            $data['half_days_string'] = null;
+            $data['days_off_string'] = null;
 
-            if(!empty($_POST['days_off']))              
-                $data['days_off'] = $_POST['days_off'];
-
+            if(!empty($_POST['days_off']))   
+            {
+                $days_off = $_POST['days_off'];
+                foreach($days_off as $check) 
+                    $data['days_off_string'] .= $check;
+            }
             if(!empty($_POST['half_day']))
             {
                 $data['total_half_slots'] = $this->input->post('total_half_slots');
-                $data['half_days'] = $_POST['half_day'];
+                $half_days = $_POST['half_day'];
+                foreach($half_days as $check) 
+                    $data['half_days_string'] .= $check;
             }
             
             if($total_time%$data['total_slots']!=0)      // Check if slots can be divided into proper time or not
@@ -89,10 +96,10 @@ class Welcome extends CI_Controller {
             {
                 // Send data to database model
                 $this->db_model->store_school_info($data['acad_year'],
-                                                   $data['days_off'],
+                                                   $data['days_off_string'],
                                                    $data['total_slots'],
                                                    $data['total_half_slots'],
-                                                   $data['half_days'],
+                                                   $data['half_days_string'],
                                                    $start_mins,
                                                    $end_mins,
                                                    $data['nof_recess'],

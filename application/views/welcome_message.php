@@ -161,7 +161,31 @@
                 jQuery("#recess2_slot").append('<option value="'+i+'" selected>'+i+'</option>'); 
             else
                 jQuery("#recess2_slot").append('<option value="'+i+'">'+i+'</option>');
-        }       
+        }      
+        
+        var days_off = <?php if(isset($days_off_string)) echo $days_off_string; else echo '"none"';?>;
+        if(days_off!="none")
+        {
+            var day;
+            while(days_off!=0)
+                {
+                    day = days_off%10;
+                    jQuery('.days_off').eq(day-1).attr('checked','checked');
+                    days_off = parseInt(days_off/10,10);
+                }
+        }
+        
+        var half_days = <?php if(isset($half_days_string)) echo $half_days_string; else echo '"none"';?>;
+        if(half_days!="none")
+        {
+            var day;
+            while(half_days!=0)
+                {
+                    day = half_days%10;
+                    jQuery('.half_days').eq(day-1).attr('checked','checked');
+                    half_days = parseInt(half_days/10,10);
+                }
+        }
         
         jQuery("#total_slots").live('change', function(){
             slot = this.value;
@@ -192,15 +216,15 @@
             <legend class="days_off_section span12">
                 <h4>Days Off</h4>
                 <fieldset>
-                    <input type="checkbox" id="days_off_mon" name="days_off[]" value="1" /><label for="days_off_mon"> Mon</label>
-                    <input type="checkbox" id="days_off_tue" name="days_off[]" value="2" /><label for="days_off_tue"> Tue</label>
-                    <input type="checkbox" id="days_off_wed" name="days_off[]" value="3" /><label for="days_off_wed"> Wed</label>
-                    <input type="checkbox" id="days_off_thu" name="days_off[]" value="4" /><label for="days_off_thu"> Thu</label>
+                    <input type="checkbox" id="days_off_mon" class="days_off" name="days_off[]" value="1" /><label for="days_off_mon"> Mon</label>
+                    <input type="checkbox" id="days_off_tue" class="days_off" name="days_off[]" value="2" /><label for="days_off_tue"> Tue</label>
+                    <input type="checkbox" id="days_off_wed" class="days_off" name="days_off[]" value="3" /><label for="days_off_wed"> Wed</label>
+                    <input type="checkbox" id="days_off_thu" class="days_off" name="days_off[]" value="4" /><label for="days_off_thu"> Thu</label>
                 </fieldset>
                 <fieldset>
-                    <input type="checkbox" id="days_off_fri" name="days_off[]" value="5" /><label for="days_off_fri"> Fri</label>
-                    <input type="checkbox" id="days_off_sat" name="days_off[]" value="6" /><label for="days_off_sat"> Sat</label>
-                    <input type="checkbox" id="days_off_sun" name="days_off[]" value="7" /><label for="days_off_sun"> Sun</label>
+                    <input type="checkbox" id="days_off_fri" class="days_off" name="days_off[]" value="5" /><label for="days_off_fri"> Fri</label>
+                    <input type="checkbox" id="days_off_sat" class="days_off" name="days_off[]" value="6" /><label for="days_off_sat"> Sat</label>
+                    <input type="checkbox" id="days_off_sun" class="days_off" name="days_off[]" value="7" /><label for="days_off_sun"> Sun</label>
                 </fieldset>
             </legend>
             <hr/>
@@ -225,15 +249,15 @@
             <legend class="half_day_section span5">
                 <h4>Half Days</h4>
                 <fieldset>
-                    <input type="checkbox" id="half_day_mon" name="half_day[]" value="1" /><label for="half_day_mon"> Mon</label>
-                    <input type="checkbox" id="half_day_tue" name="half_day[]" value="2" /><label for="half_day_tue"> Tue</label>
-                    <input type="checkbox" id="half_day_wed" name="half_day[]" value="3" /><label for="half_day_wed"> Wed</label>
-                    <input type="checkbox" id="half_day_thu" name="half_day[]" value="4" /><label for="half_day_thu"> Thu</label>
+                    <input type="checkbox" id="half_day_mon" class="half_days" name="half_day[]" value="1" /><label for="half_day_mon"> Mon</label>
+                    <input type="checkbox" id="half_day_tue" class="half_days" name="half_day[]" value="2" /><label for="half_day_tue"> Tue</label>
+                    <input type="checkbox" id="half_day_wed" class="half_days" name="half_day[]" value="3" /><label for="half_day_wed"> Wed</label>
+                    <input type="checkbox" id="half_day_thu" class="half_days" name="half_day[]" value="4" /><label for="half_day_thu"> Thu</label>
                 </fieldset>
                 <fieldset>
-                    <input type="checkbox" id="half_day_fri" name="half_day[]" value="5" /><label for="half_day_fri"> Fri</label>
-                    <input type="checkbox" id="half_day_sat" name="half_day[]" value="6" /><label for="half_day_sat"> Sat</label>
-                    <input type="checkbox" id="half_day_sun" name="half_day[]" value="7" /><label for="half_day_sun"> Sun</label>
+                    <input type="checkbox" id="half_day_fri" class="half_days" name="half_day[]" value="5" /><label for="half_day_fri"> Fri</label>
+                    <input type="checkbox" id="half_day_sat" class="half_days" name="half_day[]" value="6" /><label for="half_day_sat"> Sat</label>
+                    <input type="checkbox" id="half_day_sun" class="half_days" name="half_day[]" value="7" /><label for="half_day_sun"> Sun</label>
                 </fieldset>
             </legend>
             <legend class="half_day_slot span5 hide">
