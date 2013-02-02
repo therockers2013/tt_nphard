@@ -30,25 +30,86 @@
 
 <script>
     jQuery(document).ready(function(){
+        var date = new Date();
+        for (i=date.getFullYear(); i<date.getFullYear()+10; i++)
+        {
+            var value = <?php if(isset($acad_year)) echo $acad_year; else echo '"none"';?>;
+            if(value==i)
+                jQuery("#acad_year").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#acad_year").append('<option value="'+i+'">'+i+'</option>'); 
+        }
         for (i=7; i<18; i++)
-            jQuery("#school_start_hr").append('<option value="'+i+'">'+i+'</option>'); 
+        {
+            var value = <?php if(isset($school_start_hr)) echo $school_start_hr; else echo '"none"';?>;
+            if(value==i)
+                jQuery("#school_start_hr").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#school_start_hr").append('<option value="'+i+'">'+i+'</option>'); 
+        }
         for (i=00; i<60; i=i+5)
-            jQuery("#school_start_min").append('<option value="'+i+'">'+i+'</option>');
+        {
+            var value = <?php if(isset($school_start_min)) echo $school_start_min; else echo '"none"';?>;
+            if(value==i)
+                jQuery("#school_start_min").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#school_start_min").append('<option value="'+i+'">'+i+'</option>');
+        }
         for (i=12; i<21; i++)
-            jQuery("#school_end_hr").append('<option value="'+i+'">'+i+'</option>'); 
+        {
+            var value = <?php if(isset($school_end_hr)) echo $school_end_hr; else echo '"none"';?>;
+            if(value==i)
+                jQuery("#school_end_hr").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#school_end_hr").append('<option value="'+i+'">'+i+'</option>'); 
+        }
         for (i=00; i<60; i=i+5)
-            jQuery("#school_end_min").append('<option value="'+i+'">'+i+'</option>');
+        {
+            var value = <?php if(isset($school_end_min)) echo $school_end_min; else echo '"none"';?>;
+            if(value==i)
+                jQuery("#school_end_min").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#school_end_min").append('<option value="'+i+'">'+i+'</option>');
+        }
+        for (i=0; i<3; i++)
+        {
+            var value = <?php if(isset($nof_recess)) echo $nof_recess; else echo '"none"';?>;
+            if(value==i || i==1)
+                jQuery("#nof_recess").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#nof_recess").append('<option value="'+i+'">'+i+'</option>');
+        }
         for (i=10; i<=60; i=i+5)
         {
-            jQuery("#recess1_time").append('<option value="'+i+'">'+i+'</option>');
-            jQuery("#recess2_time").append('<option value="'+i+'">'+i+'</option>');
+            var value = <?php if(isset($recess1_time)) echo $recess1_time; else echo '"none"';?>;
+            if(value==i)
+                jQuery("#recess1_time").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#recess1_time").append('<option value="'+i+'">'+i+'</option>');
+            
+            
+            value = <?php if(isset($recess2_time)) echo $recess2_time; else echo '"none"';?>;
+            if(value==i)
+                jQuery("#recess2_time").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#recess2_time").append('<option value="'+i+'">'+i+'</option>');
         }
         for (i=5; i<10; i++)
-            jQuery("#total_slots").append('<option value="'+i+'">'+i+'</option>');
-        
+        {
+            var value = <?php if(isset($total_slots)) echo $total_slots; else echo '"none"';?>;
+            if(value==i)
+                jQuery("#total_slots").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#total_slots").append('<option value="'+i+'">'+i+'</option>');
+        }
         for (i=2; i<7; i++)
-            jQuery("#total_half_slots").append('<option value="'+i+'">'+i+'</option>');
-        
+        {
+            var value = <?php if(isset($total_half_slots)) echo $total_half_slots; else echo '"none"';?>;
+            if(value==i)
+                jQuery("#total_half_slots").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#total_half_slots").append('<option value="'+i+'">'+i+'</option>');
+        }
         jQuery('input[name="half_day[]"]').live("click",function(){
          // Here we check which boxes in the same group have been selected
          var count = 0;
@@ -83,6 +144,37 @@
          }
         });
         
+        var slot = $('#total_slots option:selected').html();
+        
+        for(i=1; i<slot; i++)
+        {
+            var value = <?php if(isset($recess1_slot)) echo $recess1_slot; else echo '"none"';?>;
+            if(value==i)
+                jQuery("#recess1_slot").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#recess1_slot").append('<option value="'+i+'">'+i+'</option>');
+        }
+        for(i=parseInt(slot/2,10); i<slot; i++)
+        {
+            var value = <?php if(isset($recess2_slot)) echo $recess2_slot; else echo '"none"';?>;
+            if(value==i)
+                jQuery("#recess2_slot").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            else
+                jQuery("#recess2_slot").append('<option value="'+i+'">'+i+'</option>');
+        }       
+        
+        jQuery("#total_slots").live('change', function(){
+            slot = this.value;
+            jQuery("#recess1_slot").text("");
+            jQuery("#recess2_slot").text("");
+            
+            for(i=1; i<slot; i++)
+                jQuery("#recess1_slot").append('<option value="'+i+'">'+i+'</option>');
+             
+            for(i=parseInt(slot/2,10); i<this.value; i++)
+                jQuery("#recess2_slot").append('<option value="'+i+'">'+i+'</option>');
+        });
+        
     });
 </script>
 
@@ -92,8 +184,8 @@
     <div id="body">
         <form name="school_info" action="<?php echo base_url('index.php/welcome/schoolInfo');?>" method="post" >
             <br/>
-            <p class="span12">Academic Year <input type="text" name="acad_year" class="span2"/>
-                <span class="error"><?php echo $this->session->flashdata('empty_acad'); ?></span>
+            <p class="span12">Academic Year 
+                <select name="acad_year" id ="acad_year" class="span1"></select>
             </p>
             <hr/>
 
@@ -152,10 +244,8 @@
             <hr/>
             <div class="span5">
                 <p class="highlight">Select number of recesses 
-                    <select name="nof_recess" class="span1">
-                        <option value="0">0</option>
-                        <option selected value="1">1</option>
-                        <option value="2">2</option>
+                    <select name="nof_recess" id="nof_recess" class="span1">
+                        
                     </select> 
                 </p>
             </div>
@@ -164,21 +254,27 @@
                     <p class="highlight">Select Time (in minutes) for Recess 1
                         <select name="recess1_time" id ="recess1_time" class="span1"></select> Min.
                     </p>
+                    <p class="highlight">Select slot after which <em><u>recess 1</u></em> should be placed
+                        <select name="recess1_slot" id ="recess1_slot" class="span1"></select>
+                    </p>
                 </div>
                 <div class="hide recess2">
                     <p class="highlight">Select Time (in minutes) for Recess 2
                         <select name="recess2_time" id ="recess2_time" class="span1"></select> Min.
                     </p>
+                    <p class="highlight">Select slot after which <em><u>recess 2</u></em> should be placed
+                        <select name="recess2_slot" id ="recess2_slot" class="span1"></select>
+                    </p>
                 </div>
             </div>
             <hr/>
             <div class="span6">
-                <p><input type="submit" value="Submit Information" class="span2 btn btn-info"/>
-                    <span class="error"><?php echo $this->session->flashdata('message'); ?></span>
+                <p><input type="submit" value="Submit Information" class="span2 btn btn-info submit"/>
+                    <span class="error"><?php if(isset($message)) echo $message;//echo $this->session->flashdata('message'); ?></span>
                 </p>
             </div>
             <div class="clearfix"></div>
-        </form>
+       </form>
         
     </div>
 

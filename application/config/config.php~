@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/utk/tt_nphard/';
+$config['base_url']	= 'http://localhost/ther/test/tt_nphard/';
 
 /*
 |--------------------------------------------------------------------------

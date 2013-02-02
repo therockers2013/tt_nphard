@@ -32,70 +32,83 @@ class Welcome extends CI_Controller {
 	
 	public function schoolInfo()
 	{
-            $start_mins = $_POST['school_start_hr'] * 60;   // Converting hours to minutes (start time)
-            $end_mins = $_POST['school_end_hr'] * 60;       // Converting hours to minutes (end time)
-            $start_mins += $_POST['school_start_min'];      // Adding minutes to converted value
-            $end_mins += $_POST['school_end_min'];          // Adding minutes to converted value
+            $data['school_start_hr'] = $_POST['school_start_hr'];   
+            $data['school_end_hr'] = $_POST['school_end_hr'];       // Converting hours to minutes (end time)
+            $data['school_start_min'] = $_POST['school_start_min'];
+            $data['school_end_min'] = $_POST['school_end_min'];
             
-            $nof_recess = $_POST['nof_recess'];             // Number of recess
+            $start_mins = ($data['school_start_hr'] * 60) + $data['school_start_min'];      // Adding minutes to converted value
+            $end_mins = ($data['school_end_hr'] * 60) + $data['school_end_min'];          // Adding minutes to converted value
             
-            $recess1=null;                                  // Set both recess time to null (Initialize)
-            $recess2=null;
-            if($nof_recess==0)
+            $data['nof_recess'] = $_POST['nof_recess'];             // Number of recess
+            
+            $data['recess1_time']=null;                                  // Set both recess time to null (Initialize)
+            $data['recess2_time']=null;
+            if($data['nof_recess']==0)
                 $recess_time = 0;                           // Set recess time to 0 if number of recess is 0
-            elseif($nof_recess==1)
+            elseif($data['nof_recess']==1)
             {
                 $recess_time = $_POST['recess1_time'];      // Set recess time to 1st recess time if number of recess is 1
-                $recess1 = $_POST['recess1_time'];          // Set recess 1 time
+                $data['recess1_time'] = $_POST['recess1_time'];          // Set recess 1 time
             }
-            elseif($nof_recess==2)
+            elseif($data['nof_recess']==2)
             {
                 $recess_time = (int)$_POST['recess1_time'] + (int)$_POST['recess2_time'];   // Set recess time to total of recess 1 and 2 if number of recess is 2
-                $recess2 = $_POST['recess2_time'];          // Set recess 2 time
+                $data['recess1_time'] = $_POST['recess1_time'];          // Set recess 1 time
+                $data['recess2_time'] = $_POST['recess2_time'];          // Set recess 2 time
             }
                 
             $total_time = ($end_mins - $start_mins) - $recess_time;   // Set lecture time by subtracting total recess time
-            $total_slots = $this->input->post('total_slots');
+            $data['total_slots'] = $this->input->post('total_slots');
             
-            if($total_time%$total_slots!=0)      // Check if slots can be divided into proper time or not
+            $data['acad_year'] = $this->input->post('acad_year');
+            $lecture_time = $total_time/$data['total_slots'];   // Time per lecture / lesson / period
+            $data['recess1_slot'] = $this->input->post('recess1_slot');
+            $data['recess2_slot'] = $this->input->post('recess2_slot');
+            $data['days_off'] = null;                           // Set days_off to null (initialize)
+            $data['total_half_slots'] = null;                   // Set total_half_slots to null (initialize)
+            $data['half_days'] = null;
+
+            if(!empty($_POST['days_off']))              
+                $data['days_off'] = $_POST['days_off'];
+
+            if(!empty($_POST['half_day']))
             {
-                $this->session->set_flashdata('message',"Improper Input! Please re-adjust timing and number of slots");     // If not show message
+                $data['total_half_slots'] = $this->input->post('total_half_slots');
+                $data['half_days'] = $_POST['half_day'];
             }
-            elseif(empty($_POST['acad_year']))
+            
+            if($total_time%$data['total_slots']!=0)      // Check if slots can be divided into proper time or not
             {
-                $this->session->set_flashdata('empty_acad',"Please enter academic year");     // If not show message
+                //$this->session->set_flashdata('message',"Improper Input! Please re-adjust timing and number of slots");     // If not show message
+                $data['message'] = "Improper Input! Please re-adjust timing and number of slots";
+                $this->load->view('welcome_message',$data);             // Redirect to same page
+                return false;
             }
             else    // If yes then do following
             {
-                $acad_year = $this->input->post('acad_year');
-                $lecture_time = $total_time/$total_slots;   // Time per lecture / lesson / period
-                $days_off = null;                           // Set days_off to null (initialize)
-                $total_half_slots = null;                   // Set total_half_slots to null (initialize)
-                $half_days = null;
-                
-                if(!empty($_POST['days_off']))              
-                    $days_off = $_POST['days_off'];
-                
-                if(!empty($_POST['half_day']))
-                {
-                    $total_half_slots = $this->input->post('total_half_slots');
-                    $half_days = $_POST['half_day'];
-                }
-                
-                $this->db_model->store_school_info($acad_year,
-                                                   $days_off,
-                                                   $total_slots,
-                                                   $total_half_slots,
-                                                   $half_days,
+                // Send data to database model
+                $this->db_model->store_school_info($data['acad_year'],
+                                                   $data['days_off'],
+                                                   $data['total_slots'],
+                                                   $data['total_half_slots'],
+                                                   $data['half_days'],
                                                    $start_mins,
                                                    $end_mins,
-                                                   $nof_recess,
-                                                   $recess1,
-                                                   $recess2,
+                                                   $data['nof_recess'],
+                                                   $data['recess1_time'],
+                                                   $data['recess2_time'],
+                                                   $data['recess1_slot'],
+                                                   $data['recess2_slot'],
                                                    $lecture_time);
             }
-            redirect('welcome');
+            redirect('welcome/class_selection');    // Redirect to class selection page
 	}
+        
+        function class_selection()
+        {
+            $this->load->view('class_selection');
+        }
 }
 
 /* End of file welcome.php */
