@@ -75,7 +75,11 @@
         {
             var value = <?php if(isset($nof_recess)) echo $nof_recess; else echo '"none"';?>;
             if(value==i || i==1)
-                jQuery("#nof_recess").append('<option value="'+i+'" selected>'+i+'</option>'); 
+            {
+                jQuery("#nof_recess").append('<option value="'+i+'" selected>'+i+'</option>');
+                if(i==2)
+                    jQuery(".recess2").show();
+            }
             else
                 jQuery("#nof_recess").append('<option value="'+i+'">'+i+'</option>');
         }
@@ -178,6 +182,7 @@
         var half_days = <?php if(isset($half_days_string)) echo $half_days_string; else echo '"none"';?>;
         if(half_days!="none")
         {
+            jQuery(".half_day_slot").show();
             var day;
             while(half_days!=0)
                 {
@@ -273,7 +278,7 @@
                     </select> 
                 </p>
             </div>
-            <div class="span5 recess_timing">
+            <div class="span6 recess_timing">
                 <div class="recess1">
                     <p class="highlight">Select Time (in minutes) for Recess 1
                         <select name="recess1_time" id ="recess1_time" class="span1"></select> Min.
@@ -292,7 +297,7 @@
                 </div>
             </div>
             <hr/>
-            <div class="span6">
+            <div class="span7">
                 <p><input type="submit" value="Submit Information" class="span2 btn btn-info submit"/>
                     <span class="error"><?php if(isset($message)) echo $message;//echo $this->session->flashdata('message'); ?></span>
                 </p>
