@@ -16,6 +16,7 @@
     {
         clear:both;
         float:none;
+        border-bottom-color: #c6c6c6;
     }
     .highlight
     {

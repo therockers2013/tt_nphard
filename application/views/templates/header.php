@@ -11,7 +11,7 @@
 	::webkit-selection{ background-color: #E13300; color: white; }
 
 	body {
-		background-color: #fff;
+		background-image: url(<?php echo base_url('images/bg.jpg'); ?>);
 		margin: 40px;
 		font: 13px/20px normal Helvetica, Arial, sans-serif;
 		color: #4F5155;
@@ -69,6 +69,7 @@
 		
 	<script src="<?php echo base_url('bootstrap/js/jquery.js');?>" ></script>
 	<script src="<?php echo base_url('bootstrap/js/bootstrap.js');?>" ></script>
+        <script src="<?php echo base_url('js/hover.zoom.js');?>" ></script>
 	
 </head>
 

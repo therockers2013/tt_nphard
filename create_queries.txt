@@ -1,0 +1,4 @@
+create table tt_school_info (field varchar(50),value varchar(50));
+
+
+

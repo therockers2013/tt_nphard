@@ -37,7 +37,8 @@ class Welcome extends CI_Controller {
         
         function class_selection()
         {
-            $this->load->view('class_selection');
+            $data['class_numbers'] = $this->db_model->get_class_numbers();
+            $this->load->view('class_selection',$data);
         }
         
         public function subject_selection()
@@ -54,6 +55,13 @@ class Welcome extends CI_Controller {
             
             $start_mins = ($data['school_start_hr'] * 60) + $data['school_start_min'];      // Adding minutes to converted value
             $end_mins = ($data['school_end_hr'] * 60) + $data['school_end_min'];          // Adding minutes to converted value
+            
+            if($start_mins>=$end_mins)
+            {
+                $data['message'] = "Improper Input! Please re-adjust school start and end timing";
+                $this->load->view('school_info',$data);             // Redirect to same page
+                return false;
+            }
             
             $data['nof_recess'] = $_POST['nof_recess'];             // Number of recess
             
@@ -104,7 +112,7 @@ class Welcome extends CI_Controller {
             {
                 //$this->session->set_flashdata('message',"Improper Input! Please re-adjust timing and number of slots");     // If not show message
                 $data['message'] = "Improper Input! Please re-adjust timing and number of slots";
-                $this->load->view('welcome_message',$data);             // Redirect to same page
+                $this->load->view('school_info',$data);             // Redirect to same page
                 return false;
             }
             else    // If yes then do following
