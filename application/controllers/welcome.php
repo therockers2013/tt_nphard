@@ -27,10 +27,25 @@ class Welcome extends CI_Controller {
         }
 	public function index()
 	{
-		$this->load->view('welcome_message');       // Starting interface (welcome screen)
+		$this->load->view('welcome');       // Starting interface (welcome screen)
 	}
-	
-	public function schoolInfo()
+        
+        public function school_info()
+        {
+            $this->load->view('school_info');       // School Info (School General Information)
+        }
+        
+        function class_selection()
+        {
+            $this->load->view('class_selection');
+        }
+        
+        public function subject_selection()
+        {
+            $this->load->view('subject_selection');       // School Info (School General Information)
+        }
+
+        public function schoolInfo()
 	{
             $data['school_start_hr'] = $_POST['school_start_hr'];   
             $data['school_end_hr'] = $_POST['school_end_hr'];       // Converting hours to minutes (end time)
@@ -112,10 +127,6 @@ class Welcome extends CI_Controller {
             redirect('welcome/class_selection');    // Redirect to class selection page
 	}
         
-        function class_selection()
-        {
-            $this->load->view('class_selection');
-        }
 }
 
 /* End of file welcome.php */

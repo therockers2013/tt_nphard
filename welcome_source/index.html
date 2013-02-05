@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Swish jQuery Zoom Hover Effect Plugin Freebie</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css?v=1">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script src="js/hover.zoom.js"></script>
+
+	<style>
+		h2
+		{
+			font-size: 1em;
+			font-weight: normal;
+			text-transform: uppercase;
+			margin: 0;
+			padding: 10px;
+			background: #d4d4d4;
+			border-top: 1px solid #fff;
+			text-align: center;
+			font: normal 10px Verdana, Arial, Helvetica, sans-serif;
+		}
+		h2 a
+		{
+			text-decoration: none;
+			color: #777;
+			display: block;
+		}
+		block > a
+		{
+			padding: 5px;
+		}
+	</style>
+    <script>
+        $(function() {
+        
+            $('.blue').hoverZoom(); // Default
+            
+            $('.yellow').hoverZoom({
+                overlayColor: '#bda62e',
+            });
+			
+			$('.green').hoverZoom({
+                overlayColor: '#a6bd2e',
+            });
+			
+			$('.pink').hoverZoom({
+                overlayColor: '#c7358c',
+            });
+			
+			$('.purple').hoverZoom({
+                overlayColor: '#a046d2',
+            });
+            
+            /* USAGE
+            
+            $('#pink').hoverZoom({
+                overlay: true, // false to turn off (default true)
+                overlayColor: '#2e9dbd', // overlay background color
+                overlayOpacity: 0.7, // overlay opacity
+                zoom: 25, // amount to zoom (px)
+                speed: 300 // speed of the hover
+            });
+            
+            */
+            
+        }); 
+    </script>
+    
+</head>
+<body>
+    <div id="container">
+
+        <div id="main">
+
+            <div class="block">
+                <a href="#" class="zoom blue"><img src="images/school_info.png" alt="thumbnail" /></a>
+				<h2><a href="#">School Information</a></h2>
+            </div>
+
+            <div class="block">
+                <a href="#" class="zoom yellow"><img src="images/classes.png" alt="thumbnail" /></a>
+				<h2><a href="#">Classes Information</a></h2>
+            </div>
+
+            <div class="block">
+                <a href="#" class="zoom green"><img src="images/subjects.png" alt="thumbnail" /></a>
+				<h2><a href="#">Subjects Information</a></h2>
+            </div>
+			
+			<div class="block">
+                <a href="#" class="zoom pink"><img src="images/teachers.png" alt="thumbnail" /></a>
+				<h2><a href="#">Teachers Information</a></h2>
+            </div>
+			
+			<div class="block">
+                <a href="#" class="zoom purple"><img src="images/rooms.png" alt="thumbnail" /></a>
+				<h2><a href="#">Rooms Information</a></h2>
+            </div>
+			
+
+        
+</body>
+</html>

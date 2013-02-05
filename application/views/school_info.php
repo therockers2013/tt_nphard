@@ -208,7 +208,7 @@
 </script>
 
 <div id="container">
-    <h1>Welcome to TT NP-Hard Problem!</h1>
+    <h1>General School Information</h1>
 
     <div id="body">
         <form name="school_info" action="<?php echo base_url('index.php/welcome/schoolInfo');?>" method="post" >
