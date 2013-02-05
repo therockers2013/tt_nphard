@@ -37,7 +37,19 @@ class Welcome extends CI_Controller {
         
         function class_selection()
         {
-            $data['class_numbers'] = $this->db_model->get_class_numbers();
+            if(isset($_REQUEST['class_info_submit']))
+            {
+                $data['class_numbers'] = array(0=>array('field'=>'class_from','value'=>$_POST['class_from']),1=>array('field'=>'class_to','value'=>$_POST['class_to']));
+                if(is_numeric($_POST['class_from']) && $_POST['class_from']>$_POST['class_to'])
+                    $data['error_message'] = "Improper Input! Please re-adjust classes";
+                else {
+                    $this->db_model->store_classes_number();
+                }
+            }
+            else
+            {
+                $data['class_numbers'] = $this->db_model->get_class_numbers();
+            }
             $this->load->view('class_selection',$data);
         }
         

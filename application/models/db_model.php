@@ -44,5 +44,11 @@ class Db_model extends CI_Model
             return $query->result_array();
         }
     }
+    
+    function store_classes_number()
+    {
+        $this->db->insert('tt_school_info',array('field'=>'classes_from','value'=>$_POST['class_from']));
+        $this->db->insert('tt_school_info',array('field'=>'classes_to','value'=>$_POST['class_to']));
+    }
 }
 ?>

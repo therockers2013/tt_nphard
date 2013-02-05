@@ -11,6 +11,10 @@
         float:none;
         border-bottom-color: #c6c6c6;
     }
+    .error
+    {
+        color: #c43c35;
+    }
 </style>
 
 <script>
@@ -86,14 +90,15 @@
     <h1>Select Number of Classes</h1>
 
     <div id="body">
-        <form name="class_info" action="<?php echo base_url('index.php/welcome/classInfo');?>" method="post" >
+        <form name="class_info" action="<?php echo base_url('index.php/welcome/class_selection');?>" method="post" >
             <br/>
             <p class="span12">
                 Enter class from  
                 <select name="class_from" id ="class_from" class="span1"></select>
                 &nbsp;&nbsp;&nbsp;&nbsp;Enter class to 
                 <select name="class_to" id ="class_to" class="span1"></select>
-                &nbsp;&nbsp;&nbsp;<input type="submit" value="Submit Information" class="span2 btn btn-info submit"/>
+                &nbsp;&nbsp;&nbsp;<input type="submit" name="class_info_submit" value="Submit Information" class="span2 btn btn-info submit"/>
+                &nbsp;&nbsp;&nbsp;<span class="error"><?php if(isset($error_message)) echo $error_message;?></span>
             </p>
             <hr/>
             <div class="select_class hide">
