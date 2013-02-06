@@ -5,16 +5,7 @@
     {
         margin-bottom: 9px;
     }
-    hr
-    {
-        clear:both;
-        float:none;
-        border-bottom-color: #c6c6c6;
-    }
-    .error
-    {
-        color: #c43c35;
-    }
+    
 </style>
 
 <script>
@@ -79,47 +70,56 @@
                 jQuery("#class_to").append('<option value="'+i+'">'+i+'</option>'); 
         }
         
-        jQuery("#myTab a").click(function()
-        {
-                    var idno = jQuery(this).index();
-                    jQuery(this).tab('show');   
-        });
+       jQuery("i").click(function()
+       {
+            var idno = jQuery(this).index();
+            jQuery(".div-flap").eq(idno).slideToggle('fast');
+            jQuery(this).toggleClass('icon-plus-sign icon-minus-sign');
+            jQuery(".div-title").eq(idno).toggleClass('open-title close-title');
+       });
+       
+       jQuery("h4.div-title").eq(0).css({'margin-top':'0'});
         
     });
 </script>
 
 <div id="container">
-    <h1>Select Number of Classes</h1>
+    <h1>Classes Information</h1>
 
     <div id="body">
-        <form name="class_info" action="<?php echo base_url('index.php/TimeTable/class_selection');?>" method="post" >
+        <form name="class_numbers" action="<?php echo base_url('index.php/TimeTable/class_selection');?>" method="post" >
             <br/>
-            <p class="span12">
-                Enter class from  
-                <select name="class_from" id ="class_from" class="span1"></select>
-                &nbsp;&nbsp;&nbsp;&nbsp;Enter class to 
-                <select name="class_to" id ="class_to" class="span1"></select>
-                &nbsp;&nbsp;&nbsp;<input type="submit" name="class_info_submit" value="Submit Information" class="span2 btn btn-info submit"/>
-                &nbsp;&nbsp;&nbsp;<span class="error"><?php if(isset($error_message)) echo $error_message;?></span>
-            </p>
-            <hr/>
-            <div class="select_class hide">
-                <p class="span12">
-                    Enter detailed information for class
-                    <select name="selected_class" id ="selected_class" class="span1"></select>
+            <h4 class="div-title open-title"><i class="icon-minus-sign icon-white"></i>Select Classes</h4>
+            <div class="from_to_selection div-flap">
+                <p class="span6">
+                    Enter class from  
+                    <select name="class_from" id ="class_from" class="span1"></select>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Enter class to 
+                    <select name="class_to" id ="class_to" class="span1"></select>
+                    &nbsp;&nbsp;&nbsp;<input type="submit" name="class_info_submit" value="Submit Information" class="span2 btn btn-info submit"/>
+                    &nbsp;&nbsp;&nbsp;<span class="error"><?php if(isset($error_message)) echo $error_message;?></span>
                 </p>
-                <p class="span12">
-                    Enter number of sections
-                    <select name="selected_section" id ="selected_section" class="span1"></select>
-                </p>
-                
+                <div class="select_class span6 hide">
+                    <p class="span5">
+                        Select class for detailed information
+                        <select name="selected_class" id ="selected_class" class="span2"></select>
+                    </p>
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <hr/>
-            <div class="class_info">
-                
-            </div>
-
         </form>
+        
+            <div class="carpet clearfix">
+                <form name="class_info">
+                    <h4><i class="icon-hand-right" ></i>Class 1</h4>
+                    <hr/>
+                    <p class="span12">
+                        Enter number of sections
+                        <select name="selected_section" id ="selected_section" class="span1"></select>
+                    </p>
+                </form>
+            </div>
+                        
     </div>
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
     

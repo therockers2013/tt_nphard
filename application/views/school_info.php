@@ -284,7 +284,7 @@
                     <p class="highlight">Select Time (in minutes) for Recess 1
                         <select name="recess1_time" id ="recess1_time" class="span1"></select> Min.
                     </p>
-                    <p class="highlight">Select slot after which <em><u>recess 1</u></em> should be placed
+                    <p class="highlight">Place <em><u>recess 1</u></em> after slot 
                         <select name="recess1_slot" id ="recess1_slot" class="span1"></select>
                     </p>
                 </div>
@@ -292,7 +292,7 @@
                     <p class="highlight">Select Time (in minutes) for Recess 2
                         <select name="recess2_time" id ="recess2_time" class="span1"></select> Min.
                     </p>
-                    <p class="highlight">Select slot after which <em><u>recess 2</u></em> should be placed
+                    <p class="highlight">Place <em><u>recess 2</u></em> after slot 
                         <select name="recess2_slot" id ="recess2_slot" class="span1"></select>
                     </p>
                 </div>

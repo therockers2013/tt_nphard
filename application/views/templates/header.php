@@ -66,6 +66,7 @@
 	
 	<link rel="stylesheet" href="<?php echo base_url('bootstrap/css/bootstrap.css');?>" />
 	<link rel="stylesheet" href="<?php echo base_url('bootstrap/css/bootstrap-responsive.css');?>" />
+        <link rel="stylesheet" href="<?php echo base_url('css/style.css');?>" />
 		
 	<script src="<?php echo base_url('bootstrap/js/jquery.js');?>" ></script>
 	<script src="<?php echo base_url('bootstrap/js/bootstrap.js');?>" ></script>

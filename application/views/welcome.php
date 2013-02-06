@@ -69,15 +69,14 @@
             $('.green').hoverZoom({
                 overlayColor: '#a6bd2e'
             });
-			
-            $('.pink').hoverZoom({
-                overlayColor: '#c7358c'
-            });
-			
+		
             $('.purple').hoverZoom({
                 overlayColor: '#a046d2'
             });
-            
+            	
+            $('.pink').hoverZoom({
+                overlayColor: '#c7358c'
+            });
             /* USAGE
             
             $('#pink').hoverZoom({
@@ -111,15 +110,15 @@
                 <a href="<?php echo base_url('index.php/TimeTable/subjects_selection');?>" class="zoom green"><img src="<?php echo base_url('images/subjects.png');?>" alt="thumbnail" /></a>
 				<h2><a href="<?php echo base_url('index.php/TimeTable/subjects_selection');?>">Subjects Info</a></h2>
             </div>
-			
+				
             <div class="block">
+                <a href="<?php echo base_url('index.php/TimeTable/rooms');?>" class="zoom purple"><img src="<?php echo base_url('images/rooms.png');?>" alt="thumbnail" /></a>
+				<h2><a href="<?php echo base_url('index.php/TimeTable/rooms');?>">Rooms Info</a></h2>
+            </div>
+            		
+            <div class="block last">
                 <a href="#" class="zoom pink"><img src="<?php echo base_url('images/teachers.png');?>" alt="thumbnail" /></a>
 				<h2><a href="#">Teachers Info</a></h2>
-            </div>
-			
-            <div class="block last">
-                <a href="#" class="zoom purple"><img src="<?php echo base_url('images/rooms.png');?>" alt="thumbnail" /></a>
-				<h2><a href="#">Rooms Info</a></h2>
             </div>
 	</div>
     </div>

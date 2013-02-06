@@ -22,8 +22,9 @@ class TimeTable extends CI_Controller {
 	{
 		parent::__construct();
                 $this->load->library('session');            // For Maintaining Session
-                $this->load->helper('url');                 // For base_url
+                $this->load->helper(array('form', 'url'));  // For form validations and base_url
                 $this->load->model('db_model');             // For including database model
+		$this->load->library('form_validation');    // For form validation class
         }
 	public function index()
 	{
@@ -53,9 +54,26 @@ class TimeTable extends CI_Controller {
             $this->load->view('class_selection',$data);
         }
         
-        public function subject_selection()
+        public function subjects_selection()
         {
-            $this->load->view('subject_selection');       // School Info (School General Information)
+            $this->load->view('subjects_selection');       // School Info (School General Information)
+        }
+        
+        public function rooms()
+        {
+            $this->load->view('rooms');                     // Special Rooms Information Form e.g. Chemistry Lab
+        }
+        
+        public function room_info()
+        {
+            $this->form_validation->set_rules('room_no', 'Room Number', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('room_title', 'Room Title', 'trim|required|xss_clean');
+            $this->form_validation->set_message('required', ' * Required');
+            if ($this->form_validation->run() != FALSE)
+            {
+        	$this->db_model->add_room($_POST['room_no'],$_POST['room_title']);
+            }
+            $this->load->view('rooms');
         }
 
         public function schoolInfo()
@@ -144,10 +162,10 @@ class TimeTable extends CI_Controller {
                                                    $data['recess2_slot'],
                                                    $lecture_time);
             }
-            redirect('welcome/class_selection');    // Redirect to class selection page
+            redirect('TimeTable/class_selection');    // Redirect to class selection page
 	}
         
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file TimeTable.php */
+/* Location: ./application/controllers/TimeTable.php */

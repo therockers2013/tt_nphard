@@ -60,5 +60,17 @@ class Db_model extends CI_Model
             $this->db->query('update tt_school_info set value = "'.$_POST['class_to'].'" where field="classes_to"');
         }
     }
+    
+    function add_room($room_no,$room_title)
+    {
+        $this->db->query('select * from tt_class_rooms where class__room = "'.$room_no.'"');
+        if($this->db->affected_rows()>0)
+            $this->session->set_flashdata('error_message','This room number already exists');
+        else
+        {
+            $this->db->query('insert into tt_class_rooms (class__room,section__title,common) values("'.$room_no.'","'.$room_title.'",1)');
+            $this->session->set_flashdata('success','Room added successfully');
+        }
+    }
 }
 ?>
