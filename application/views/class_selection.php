@@ -57,8 +57,10 @@
             jQuery(".select_class").show();
             if((jQuery.inArray(classes_from, arr)==-1))
             {
-                for (i=classes_from; i<=classes_to; i++)
+                for (i=parseInt(classes_from); i <= classes_to; i++)
+                {
                     jQuery("#selected_class").append('<option value="'+i+'">'+i+'</option>');
+                }
             }    
             else
                 for (i=1; i<=classes_to; i++)
@@ -90,7 +92,7 @@
     <h1>Select Number of Classes</h1>
 
     <div id="body">
-        <form name="class_info" action="<?php echo base_url('index.php/welcome/class_selection');?>" method="post" >
+        <form name="class_info" action="<?php echo base_url('index.php/TimeTable/class_selection');?>" method="post" >
             <br/>
             <p class="span12">
                 Enter class from  
@@ -103,7 +105,7 @@
             <hr/>
             <div class="select_class hide">
                 <p class="span12">
-                    Enter information for class
+                    Enter detailed information for class
                     <select name="selected_class" id ="selected_class" class="span1"></select>
                 </p>
                 <p class="span12">

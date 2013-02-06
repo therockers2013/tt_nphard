@@ -98,18 +98,18 @@
         <div id="main" class="span12">
 
             <div class="block">
-                <a href="<?php echo base_url('index.php/welcome/school_info');?>" class="zoom blue"><img src="<?php echo base_url('images/school_info.png');?>" alt="thumbnail" /></a>
-				<h2><a href="<?php echo base_url('index.php/welcome/school_info');?>">School Info</a></h2>
+                <a href="<?php echo base_url('index.php/TimeTable/school_info');?>" class="zoom blue"><img src="<?php echo base_url('images/school_info.png');?>" alt="thumbnail" /></a>
+				<h2><a href="<?php echo base_url('index.php/TimeTable/school_info');?>">School Info</a></h2>
             </div>
 
             <div class="block">
-                <a href="<?php echo base_url('index.php/welcome/class_selection');?>" class="zoom yellow"><img src="<?php echo base_url('images/classes.png');?>" alt="thumbnail" /></a>
-				<h2><a href="<?php echo base_url('index.php/welcome/class_selection');?>">Classes Info</a></h2>
+                <a href="<?php echo base_url('index.php/TimeTable/class_selection');?>" class="zoom yellow"><img src="<?php echo base_url('images/classes.png');?>" alt="thumbnail" /></a>
+				<h2><a href="<?php echo base_url('index.php/TimeTable/class_selection');?>">Classes Info</a></h2>
             </div>
 
             <div class="block">
-                <a href="<?php echo base_url('index.php/welcome/subjects_selection');?>" class="zoom green"><img src="<?php echo base_url('images/subjects.png');?>" alt="thumbnail" /></a>
-				<h2><a href="<?php echo base_url('index.php/welcome/subjects_selection');?>">Subjects Info</a></h2>
+                <a href="<?php echo base_url('index.php/TimeTable/subjects_selection');?>" class="zoom green"><img src="<?php echo base_url('images/subjects.png');?>" alt="thumbnail" /></a>
+				<h2><a href="<?php echo base_url('index.php/TimeTable/subjects_selection');?>">Subjects Info</a></h2>
             </div>
 			
             <div class="block">

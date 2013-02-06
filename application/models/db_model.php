@@ -47,8 +47,18 @@ class Db_model extends CI_Model
     
     function store_classes_number()
     {
-        $this->db->insert('tt_school_info',array('field'=>'classes_from','value'=>$_POST['class_from']));
-        $this->db->insert('tt_school_info',array('field'=>'classes_to','value'=>$_POST['class_to']));
+        $this->db->query('select * from tt_school_info where field = "classes_from"');
+        
+        if($this->db->affected_rows()==0)
+        {
+            $this->db->insert('tt_school_info',array('field'=>'classes_from','value'=>$_POST['class_from']));
+            $this->db->insert('tt_school_info',array('field'=>'classes_to','value'=>$_POST['class_to']));
+        }
+        else 
+        {
+            $this->db->query('update tt_school_info set value = "'.$_POST['class_from'].'" where field="classes_from"');
+            $this->db->query('update tt_school_info set value = "'.$_POST['class_to'].'" where field="classes_to"');
+        }
     }
 }
 ?>

@@ -212,7 +212,7 @@
     <h1>General School Information</h1>
 
     <div id="body">
-        <form name="school_info" action="<?php echo base_url('index.php/welcome/schoolInfo');?>" method="post" >
+        <form name="school_info" action="<?php echo base_url('index.php/TimeTable/schoolInfo');?>" method="post" >
             <br/>
             <p class="span12">Academic Year 
                 <select name="acad_year" id ="acad_year" class="span1"></select>

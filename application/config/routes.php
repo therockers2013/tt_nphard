@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "TimeTable";
 $route['404_override'] = '';
 
 
