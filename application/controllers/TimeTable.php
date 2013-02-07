@@ -56,26 +56,53 @@ class TimeTable extends CI_Controller {
         
         public function subjects_selection()
         {
-            $this->load->view('subjects_selection');       // School Info (School General Information)
+            $data['rooms_info'] = $this->db_model->get_rooms_info();  // To fetch all rooms information
+            $this->load->view('subjects_selection',$data);       // School Info (School General Information)
         }
         
         public function rooms()
         {
-            $this->load->view('rooms');                     // Special Rooms Information Form e.g. Chemistry Lab
+            if(isset($_REQUEST['submit_room']))
+            {
+                $this->form_validation->set_rules('room_no', 'Room Number', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('room_title', 'Room Title', 'trim|required|xss_clean');
+                $this->form_validation->set_message('required', ' * Required');
+                $data = NULL;
+                if ($this->form_validation->run() != FALSE)
+                {
+                    if($this->db_model->add_room($_POST['room_no'],$_POST['room_title']))
+                        $data['success'] = "Room added successfully";
+                    else
+                        $data['failure'] = "This room number already exists";
+                }
+            }
+            if(isset($_REQUEST['save_room']))
+            {
+                $this->form_validation->set_rules('room_id', 'Room Id', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('room_no', 'Room Number', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('room_title', 'Room Title', 'trim|required|xss_clean');
+                $this->form_validation->set_message('required', ' * Required');
+                $data = NULL;
+                if ($this->form_validation->run() != FALSE)
+                {
+                    if($this->db_model->save_room($_POST['room_id'],$_POST['room_no'],$_POST['room_title']))
+                        $data['success'] = "Room Saved Successfully";
+                    else
+                        $data['failure'] = "Record not found";
+                }
+            }
+            $data['rooms_info'] = $this->db_model->get_rooms_info();  // To fetch all rooms information
+            $this->load->view('rooms',$data);                     // Special Rooms Information Form e.g. Chemistry Lab
         }
         
-        public function room_info()
+        public function remove_room()
         {
-            $this->form_validation->set_rules('room_no', 'Room Number', 'trim|required|xss_clean');
-            $this->form_validation->set_rules('room_title', 'Room Title', 'trim|required|xss_clean');
-            $this->form_validation->set_message('required', ' * Required');
-            if ($this->form_validation->run() != FALSE)
-            {
-        	$this->db_model->add_room($_POST['room_no'],$_POST['room_title']);
-            }
-            $this->load->view('rooms');
+            if($this->db_model->remove_room($_POST['room_id']))
+                echo true;
+            else
+                echo false;
         }
-
+        
         public function schoolInfo()
 	{
             $data['school_start_hr'] = $_POST['school_start_hr'];   

@@ -84,8 +84,14 @@
 </script>
 
 <div id="container">
-    <h1>Classes Information</h1>
-
+    <h1 class="span5">Classes Information</h1>
+    <a href="<?php echo base_url('index.php/TimeTable/rooms');?>"><img class="nav-links pull-right" alt="Teachers Info" src="<?php echo base_url('images/teachers_thumb.png');?>" /></a>
+    <a href="<?php echo base_url('index.php/TimeTable/rooms');?>"><img class="nav-links pull-right" alt="Rooms Info" src="<?php echo base_url('images/rooms_thumb.png');?>" /></a>
+    <a href="<?php echo base_url('index.php/TimeTable/subjects_selection');?>"><img class="nav-links pull-right" alt="Subjects Info" src="<?php echo base_url('images/subjects_thumb.png');?>" /></a>
+    <a href="<?php echo base_url('index.php/TimeTable/class_selection');?>"><img class="nav-links pull-right" alt="Classes Info" src="<?php echo base_url('images/classes_thumb.png');?>" /></a>
+    <a href="<?php echo base_url('index.php/TimeTable/school_info');?>"><img class="nav-links pull-right" alt="General Info" src="<?php echo base_url('images/school_info_thumb.png');?>" /></a>
+    
+    <hr/>
     <div id="body">
         <form name="class_numbers" action="<?php echo base_url('index.php/TimeTable/class_selection');?>" method="post" >
             <br/>

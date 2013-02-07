@@ -71,6 +71,7 @@
 	<script src="<?php echo base_url('bootstrap/js/jquery.js');?>" ></script>
 	<script src="<?php echo base_url('bootstrap/js/bootstrap.js');?>" ></script>
         <script src="<?php echo base_url('js/hover.zoom.js');?>" ></script>
+        <script src="<?php echo base_url('js/custom_script.js');?>" ></script>
 	
 </head>
 

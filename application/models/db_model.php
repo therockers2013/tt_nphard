@@ -65,11 +65,41 @@ class Db_model extends CI_Model
     {
         $this->db->query('select * from tt_class_rooms where class__room = "'.$room_no.'"');
         if($this->db->affected_rows()>0)
-            $this->session->set_flashdata('error_message','This room number already exists');
+            return false;
         else
         {
-            $this->db->query('insert into tt_class_rooms (class__room,section__title,common) values("'.$room_no.'","'.$room_title.'",1)');
-            $this->session->set_flashdata('success','Room added successfully');
+            $this->db->query('insert into tt_class_rooms (class__room,section__title,joint) values("'.$room_no.'","'.$room_title.'",1)');
+            return true;
+        }
+    }
+    
+    function get_rooms_info()
+    {
+        $query = $this->db->query('select * from tt_class_rooms');
+        if($this->db->affected_rows()==0)
+            return NULL;
+        else
+            return $query->result();
+    }
+    
+    function save_room($room_id,$room_no,$room_title)
+    {
+        $this->db->query('update tt_class_rooms set class__room = "'.$room_no.'", section__title="'.$room_title.'" where cid='.$room_id);
+        if($this->db->affected_rows()>0)
+            return true;
+        else
+            return false;
+    }
+    
+    function remove_room($room_id)
+    {
+        $this->db->query('select * from tt_class_rooms where cid = '.$room_id);
+        if($this->db->affected_rows()==0)
+            return false;
+        else
+        {
+            $this->db->query('delete from tt_class_rooms where cid = '.$room_id);
+            return true;
         }
     }
 }

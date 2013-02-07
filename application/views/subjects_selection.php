@@ -18,8 +18,14 @@
 
 
 <div id="container">
-    <h1>Subjects Information</h1>
-
+    <h1 class="span5">Subjects Information</h1>
+    <a href="<?php echo base_url('index.php/TimeTable/rooms');?>"><img class="nav-links pull-right" alt="Teachers Info" src="<?php echo base_url('images/teachers_thumb.png');?>" /></a>
+    <a href="<?php echo base_url('index.php/TimeTable/rooms');?>"><img class="nav-links pull-right" alt="Rooms Info" src="<?php echo base_url('images/rooms_thumb.png');?>" /></a>
+    <a href="<?php echo base_url('index.php/TimeTable/subjects_selection');?>"><img class="nav-links pull-right" alt="Subjects Info" src="<?php echo base_url('images/subjects_thumb.png');?>" /></a>
+    <a href="<?php echo base_url('index.php/TimeTable/class_selection');?>"><img class="nav-links pull-right" alt="Classes Info" src="<?php echo base_url('images/classes_thumb.png');?>" /></a>
+    <a href="<?php echo base_url('index.php/TimeTable/school_info');?>"><img class="nav-links pull-right" alt="General Info" src="<?php echo base_url('images/school_info_thumb.png');?>" /></a>
+    
+    <hr/>
     <div id="body">
         <form name="select_option_form" action="<?php echo base_url('index.php/TimeTable/class_selection');?>" method="post" class="clearfix">
             <br/>
@@ -55,20 +61,27 @@
                         <div class="control-group">
                             <label class="control-label">Subject Type</label>
                             <div class="controls">
-                                <label class="radio inline" for="lecture_opt"> 
-                                    <input type="radio" id="lecture_opt" value="l" /> Lecture
-                                </label>
-                                <label class="radio inline span2" for="practical_opt"> 
+                                                     
+                                <label class="radio inline span2" style="margin-left:0" for="practical_opt"> 
                                     <input type="radio" id="practical_opt" value="p" /> Practical / Others
                                 </label>
+                                
+                                
+                                
+                                <label class="radio inline" style="margin-left:0" for="lecture_opt"> 
+                                    <input type="radio" id="lecture_opt" value="l" /> Lecture
+                                </label>
+                     <?php if($rooms_info==NULL): ?>
+                                    <p style="margin-top:10px;"> <a href="<?php echo base_url('index.php/TimeTable/rooms')?>" target="_blank">Add multiple rooms for multiple practical</a></p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
-                    <div class="control-group">
+                    <!-- <div class="control-group">
                         <label class="control-label">Minimum hrs. / week </label>
                         <div class="controls">
                           <select name="min_hrs" class="span2">
-                              <?php 
+                              < ?php 
                                 for($i=1; $i<15; $i++)
                                 {
                                     echo '<option value='.$i.'>'.$i.'</option>';
@@ -76,19 +89,22 @@
                               ?>
                           </select>
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Select multiple rooms for multiple subjects <span class="small">(Hold Ctrl key and select)</span></label>
-                        <div class="controls">
-                          <select name="" class="span2" multiple="multiple">
-                              <?php 
-                                for($i=1; $i<15; $i++)
-                                {
-                                    echo '<option value='.$i.'>'.$i.'</option>';
-                                }
-                              ?>
-                          </select>
-                        </div>
+                    </div> -->
+
+                    <div class="control-group rooms_div hide">
+                        <?php if($rooms_info!=NULL): ?>
+                                <label class="control-label">Select multiple rooms for multiple subjects <span class="small">(Hold Ctrl key and select)</span></label>
+                                <div class="controls">
+
+                                        <select name="" class="span2" multiple="multiple">
+                                            <?php foreach($rooms_info as $room):?>
+                                                <option value="<?php echo $room->cid;?>"><?php echo $room->class__room.": ".$room->section__title;?></option>
+                                            <?php endforeach;?>    
+                                        </select>
+
+                                  </select>
+                                </div>
+                        <?php endif; ?>
                     </div>
             </form>
         </div>
